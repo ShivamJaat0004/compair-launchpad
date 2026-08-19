@@ -11,6 +11,9 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as DistributorOpportunityRouteImport } from './routes/distributor-opportunity'
+import { Route as MissionVisionRouteImport } from './routes/mission-vision'
+import { Route as ProductsRouteImport } from './routes/products'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -22,31 +25,74 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DistributorOpportunityRoute = DistributorOpportunityRouteImport.update({
+  id: '/distributor-opportunity',
+  path: '/distributor-opportunity',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const MissionVisionRoute = MissionVisionRouteImport.update({
+  id: '/mission-vision',
+  path: '/mission-vision',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ProductsRoute = ProductsRouteImport.update({
+  id: '/products',
+  path: '/products',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/distributor-opportunity': typeof DistributorOpportunityRoute
+  '/mission-vision': typeof MissionVisionRoute
+  '/products': typeof ProductsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/distributor-opportunity': typeof DistributorOpportunityRoute
+  '/mission-vision': typeof MissionVisionRoute
+  '/products': typeof ProductsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/distributor-opportunity': typeof DistributorOpportunityRoute
+  '/mission-vision': typeof MissionVisionRoute
+  '/products': typeof ProductsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/distributor-opportunity'
+    | '/mission-vision'
+    | '/products'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about'
-  id: '__root__' | '/' | '/about'
+  to:
+    | '/'
+    | '/about'
+    | '/distributor-opportunity'
+    | '/mission-vision'
+    | '/products'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/distributor-opportunity'
+    | '/mission-vision'
+    | '/products'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  DistributorOpportunityRoute: typeof DistributorOpportunityRoute
+  MissionVisionRoute: typeof MissionVisionRoute
+  ProductsRoute: typeof ProductsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -65,12 +111,36 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/distributor-opportunity': {
+      id: '/distributor-opportunity'
+      path: '/distributor-opportunity'
+      fullPath: '/distributor-opportunity'
+      preLoaderRoute: typeof DistributorOpportunityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/mission-vision': {
+      id: '/mission-vision'
+      path: '/mission-vision'
+      fullPath: '/mission-vision'
+      preLoaderRoute: typeof MissionVisionRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products': {
+      id: '/products'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  DistributorOpportunityRoute: DistributorOpportunityRoute,
+  MissionVisionRoute: MissionVisionRoute,
+  ProductsRoute: ProductsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
